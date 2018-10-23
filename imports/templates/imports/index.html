@@ -1,0 +1,20 @@
+<!-- templates/imports/index.html-->
+{% extends 'base.html' %}
+
+{% block title %}imports{% endblock %}
+
+{% block content %}
+<center><h1>Imports</h1></center>
+<h2>Optimum</h2>
+{% if latest_importOptimum_list %}
+    <ul>
+    {% for importOptimum in latest_importOptimum_list %}
+        <li><a href="{% url 'imports:detail' importOptimum.id %}">{{ importOptimum.pub_date }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No imports are available.</p>
+{% endif %}
+<a href="{% url 'imports:importer' %}">Importer</a>
+{% endblock %}
+

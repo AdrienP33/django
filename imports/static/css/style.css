@@ -1,0 +1,122 @@
+body {
+    width:100%;
+    padding:0;
+    margin:0;
+}
+
+.nav1  {
+    padding:20px;
+    background-color:#052d85;
+    font-weight:bold;
+}
+.nav1 a {
+    width:15em;
+}
+
+.nav1 a li {
+    text-size:30px;
+    color:white;
+    display:block;
+    text-align:center;
+}
+
+.content {
+    margin-left:150px;
+    margin-right:150px;
+    margin-top:50px;
+}
+
+.lognav {
+    float: right;
+}
+
+.myButton {
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffffff), color-stop(1, #f6f6f6));
+	background:-moz-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+	background:-webkit-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+	background:-o-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+	background:-ms-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+	background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0);
+	background-color:#ffffff;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	cursor:pointer;
+	color:#052e85;
+	font-family:Arial;
+	font-size:20px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffffff;
+}
+
+.myButton:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f6f6f6), color-stop(1, #ffffff));
+	background:-moz-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
+	background:-webkit-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
+	background:-o-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
+	background:-ms-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
+	background:linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f6f6f6', endColorstr='#ffffff',GradientType=0);
+	background-color:#f6f6f6;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
+.logform {
+    background-color:#052d85;
+    color:white;
+    width:300px;
+    padding:20px;
+    border-bottom: 6px solid lightgrey;
+    border-right: 6px solid lightgrey;
+}
+
+.logform a {
+    text-decoration:none;
+    color:white;
+}
+
+#id_username {
+    color:#052d85
+}
+
+#id_password {
+    color:#052d85
+}
+
+#logo {
+    border-style: inset;
+    border-width: 5px;
+}
+
+#footer {
+    bottom:0;
+}
+
+
+#overlay6{
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+#modalCheck6{
+    display: none;
+}
+#modalCheck6:checked + #overlay6{
+    display: block;
+}

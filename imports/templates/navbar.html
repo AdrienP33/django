@@ -1,0 +1,13 @@
+<!-- templates/navbar.html-->
+{% extends 'base.html' %}
+
+{% block title %}Navbar{% endblock %}
+
+
+<ul class="row">
+    <a href="{% url 'home' %}"><li class="col-lg-3 col-md-3">Home</li></a>
+    <a href="{% url 'home' %}"><li class="col-lg-3 col-md-3">Home</li></a>
+    <a href="{% url 'home' %}"><li class="col-lg-3 col-md-3">Home</li></a>
+</ul>
+
+{% block content %}

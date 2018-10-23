@@ -1,0 +1,29 @@
+<!-- templates/imports/importer.html-->
+{% extends 'base.html' %}
+
+{% block title %}importer{% endblock %}
+
+{% block content %}
+<center><h1>Importer</h1></center>
+
+<form enctype="multipart/form-data" action="upload_csv/" name="test" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input id="signUpSubmit" type="submit" value="Importer">
+</form>
+
+<div>
+    <label for="modalCheck6">Voir la fenêtre modale</label><input type="checkbox" id="modalCheck6" />
+    <div id="overlay6">
+        <div class="popup_block">
+            <label for="modalCheck6"><img alt="Fermer" title="Fermer la fenêtre" class="my_btn_close" src="./images/close_pop.png" /></label>
+            <img style="float: right; margin: 0 0 0 20px;" alt="Lil bomb dude" src="./images/bomber.gif" />
+            <h2>Popup</h2>
+
+            <p>Aliquip transverbero loquor esse ille vulputate exerci veniam fatua eros similis illum valde. Praesent, venio conventio rusticus antehabeo lenis. Melior pertineo feugait, praesent hos rusticus et haero facilisis abluo. </p>
+            <p>Veniam tincidunt augue abluo vero, augue nisl melior quidem secundum nobis singularis eum eum.</p>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

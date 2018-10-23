@@ -1,0 +1,21 @@
+<!-- templates/home.html-->
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+  <center>
+{% if user.is_authenticated %}
+  Bonjour {{ user.username }} !
+  <br>
+{% else %}
+    <p>You are not logged in</p>
+    <a href="{% url 'login' %}">login</a>
+    {% endif %}
+  </center>
+{% if user.is_authenticated %}
+  <ul>
+    <li><a href="{% url 'imports:index' %}">Imports</a></li>
+  </ul>
+{% endif %}
+{% endblock %}
