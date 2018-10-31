@@ -6,10 +6,10 @@
 {% block content %}
 <center><h1>Imports</h1></center>
 <h2>Optimum</h2>
-{% if latest_importOptimum_list %}
+{% if latest_import_list %}
     <ul>
-    {% for importOptimum in latest_importOptimum_list %}
-        <li><a href="{% url 'imports:detail' importOptimum.id %}">{{ importOptimum.pub_date }}</a></li>
+    {% for import in latest_import_list %}
+        <li><a href="{% url 'imports:detail' import.id %}">{{ import.pub_date }}, {{ import.author }}</a></li>
     {% endfor %}
     </ul>
 {% else %}

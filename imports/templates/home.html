@@ -16,6 +16,7 @@
 {% if user.is_authenticated %}
   <ul>
     <li><a href="{% url 'imports:index' %}">Imports</a></li>
+    <li><a href="{% url 'suivi:index' %}">Suivi</a></li>
   </ul>
 {% endif %}
 {% endblock %}

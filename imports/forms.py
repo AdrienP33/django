@@ -1,6 +1,6 @@
 from django import forms
 
-from imports.models import ImportOptimum
+from imports.models import ImportOptimum, Pa
 
 
 class ImportFileForm(forms.Form):

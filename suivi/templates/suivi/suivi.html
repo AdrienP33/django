@@ -1,0 +1,10 @@
+<!-- templates/suivi/suivi.html-->
+{% extends 'index.html' %}
+
+{% block title %}suivre{% endblock %}
+
+<form enctype="multipart/form-data" action="pa-autocomplete/" name="test" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input id="selectorPa" type="submit" value="Selectionner">
+</form>
