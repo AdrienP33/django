@@ -40,7 +40,7 @@ class DetailView(LoginRequiredMixin, generic.ListView):
     context_object_name = 'import_detail'
 
     def get_queryset(self):
-        return ImportOptimum.objects.filter(import_info=self.kwargs['import_id'])
+        return ImportOptimum.objects.filter(import_fk=self.kwargs['import_id'])
 
 
 class ImporterView(LoginRequiredMixin, generic.FormView):
@@ -64,15 +64,18 @@ def upload_csv(request):
             i.save()
             with open(path + csv_file, 'r', encoding='utf-8-sig') as csvfile:
                 reader = csv.DictReader(csvfile, delimiter=";")
+
                 for row in reader:
-                    p = ImportOptimum(dossier=row['Dossier'], code_regroupement_syndic=row['Code Regroupement Syndic'], import_fk=i)
-                    print(row['Dossier'])
-                    p.save()
+
                     for row1 in reader:
+                        p = ImportOptimum(dossier=row1['Dossier'], code_regroupement_syndic=row1['Code Regroupement Syndic'], import_fk=i)
+                        print(row['Dossier'])
+                        p.save()
                         if row1['Dossier'] != row['Dossier']:
                             imb = Imb(refImb=row1['Dossier'], import_fk=i)
                             imb.save()
-            # form.save()
+                            print(row1['Dossier'])
+
             return HttpResponseRedirect(reverse('imports:index'))
     else:
         form = ImportFileForm()

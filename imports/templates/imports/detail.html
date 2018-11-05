@@ -4,26 +4,27 @@
 {% block title %}detail{% endblock %}
 
 {% block content %}
-<h1>Import n° {{ importOptimum.import_info }}</h1>
+<h1>Détail de l'import</h1>
+<a href="{% url 'imports:index' %}">Retour</a>
 <div class="component">
-				<h2>Basic usage</h2>
-				{% if import_detail %}
-				<table>
-					<thead>
-						<tr>
-							<th>ID IMB</th>
-							<th>Date de publication</th>
-							<th>Auteur</th>
-						</tr>
-					</thead>
-					<tbody>
-					{% for importOptimum in import_detail %}
-						<tr><td class="user-name">{{ importOptimum.dossier }}</td><td class="user-email">{{ importOptimum.dossier }}</td><td class="user-phone">{{ importOptimum.import_info }}</td></tr>
-					{% endfor %}
-					</tbody>
-				</table>
-				{% else %}
-    			<p>No imports are available.</p>
-				{% endif %}
-			</div>
+	<h2>Import n° {{ importOptimum.import_fk }}</h2>
+	{% if import_detail %}
+	<table>
+		<thead>
+		<tr>
+			<th>ID IMB</th>
+			<th>Date de publication</th>
+			<th>Auteur</th>
+		</tr>
+		</thead>
+		<tbody>
+		{% for importOptimum in import_detail %}
+		<tr><td class="user-name">{{ importOptimum.dossier }}</td><td class="user-email">{{ importOptimum.dossier }}</td><td class="user-phone">{{ importOptimum.import_fk }}</td></tr>
+		{% endfor %}
+		</tbody>
+	</table>
+	{% else %}
+	<p>No imports are available.</p>
+	{% endif %}
+</div>
 {% endblock %}

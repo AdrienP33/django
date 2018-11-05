@@ -97,12 +97,19 @@ class ImportOptimum(models.Model):
         return self.pub_date >= timezone.now() - datetime.timedelta(days=5)
 
 
+class Pmz(models.Model):
+    refPmz = models.CharField(max_length=50, null=True)
+    import_fk = models.ForeignKey(Import, on_delete=models.CASCADE, null=True)
+
+
 class Pa(models.Model):
     refPa = models.CharField(max_length=50, null=True)
     import_fk = models.ForeignKey(Import, on_delete=models.CASCADE, null=True)
+    pmz_fk = models.ForeignKey(Pmz, on_delete=models.CASCADE, null=True)
 
 
 class Imb(models.Model):
     refImb = models.CharField(max_length=50, null=True)
     date_effective_de_raccordement = models.DateTimeField('dare effective de raccordement', null=True)
     import_fk = models.ForeignKey(Import, on_delete=models.CASCADE, null=True)
+    pa_fk = models.ForeignKey(Pa, on_delete=models.CASCADE, null=True)
