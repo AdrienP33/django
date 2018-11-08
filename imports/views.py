@@ -13,11 +13,13 @@ from django.views import generic
 
 
 import csv
+import pandas as pd
+from datetime import datetime, date
 
 from django.views.generic import TemplateView
 
 from adaptor.model import CsvDbModel
-from .models import ImportOptimum, Import, RefImport, Imb
+from .models import ImportOptimum, Import, RefImport, Imb, Pmz, Pa
 from .forms import ImportFileForm
 
 
@@ -72,9 +74,119 @@ def upload_csv(request):
                         print(row['Dossier'])
                         p.save()
                         if row1['Dossier'] != row['Dossier']:
-                            imb = Imb(refImb=row1['Dossier'], import_fk=i)
-                            imb.save()
-                            print(row1['Dossier'])
+
+                            if row1['Id PM'] == '':
+                                if row1['Id PA'] == '':
+                                    if row1['Date effective raccordement'] == '' or not Imb.objects.filter(refImb=row1['Dossier']):
+                                        imb = Imb(refImb=row1['Dossier'], import_fk=i)
+                                        imb.save()
+                                    else:
+                                        ligne_date = row1['Date effective raccordement']
+                                        dates = datetime.strptime(ligne_date, '%d/%m/%Y')
+                                        imb = Imb(refImb=row1['Dossier'], date_effective_de_raccordement=dates.date(), import_fk=i)
+                                        imb.save()
+                                elif not Pa.objects.get(refPa=row1['Id PA']):
+                                    pa = Pa(refPa=row1['Id PA'], import_fk=i)
+                                    pa.save()
+                                    # pa = Pa(refPa=row1['id PA'], import_fk=i, pmz_fk=pmz)
+                                    if row1['Date effective raccordement'] == '' or not Imb.objects.filter(refImb=row1['Dossier']):
+                                        imb = Imb(refImb=row1['Dossier'], import_fk=i, pa_fk=pa)
+                                        imb.save()
+                                    elif row1['Dossier'] != '':
+                                        ligne_date = row1['Date effective raccordement']
+                                        dates = datetime.strptime(ligne_date, '%d/%m/%Y')
+                                        imb = Imb(refImb=row1['Dossier'], date_effective_de_raccordement=dates.date(), import_fk=i, pa_fk=pa)
+                                        imb.save()
+                                else:
+                                    pa = Pa.objects.get(refPa=row1['Id PA'])
+                                    if row1['Date effective raccordement'] == '' or not Imb.objects.filter(refImb=row1['Dossier']):
+                                        imb = Imb(refImb=row1['Dossier'], import_fk=i, pa_fk=pa)
+                                        imb.save()
+                                    else:
+                                        ligne_date = row1['Date effective raccordement']
+                                        dates = datetime.strptime(ligne_date, '%d/%m/%Y')
+                                        imb = Imb(refImb=row1['Dossier'], date_effective_de_raccordement=dates.date(), import_fk=i, pa_fk=pa)
+                                        imb.save()
+
+                            elif not Pmz.objects.filter(refPmz=row1['Id PM']):
+                                pmz = Pmz(refPmz=row1['Id PM'], import_fk=i)
+                                pmz.save()
+                                if row1['Id PA'] == '':
+                                    if row1['Date effective raccordement'] == '' or not Imb.objects.filter(refImb=row1['Dossier']):
+                                        imb = Imb(refImb=row1['Dossier'], import_fk=i)
+                                        imb.save()
+                                    else:
+                                        ligne_date = row1['Date effective raccordement']
+                                        dates = datetime.strptime(ligne_date, '%d/%m/%Y')
+                                        imb = Imb(refImb=row1['Dossier'], date_effective_de_raccordement=dates.date(), import_fk=i)
+                                        imb.save()
+                                elif not Pa.objects.filter(refPa=row1['Id PA']):
+                                    pa = Pa(refPa=row1['Id PA'], import_fk=i, pmz_fk=pmz)
+                                    pa.save()
+                                    # pa = Pa(refPa=row1['id PA'], import_fk=i, pmz_fk=pmz)
+                                    if row1['Date effective raccordement'] == '' or not Imb.objects.filter(refImb=row1['Dossier']):
+                                        imb = Imb(refImb=row1['Dossier'], import_fk=i, pa_fk=pa)
+                                        imb.save()
+                                    elif row1['Dossier'] != '':
+                                        ligne_date = row1['Date effective raccordement']
+                                        dates = datetime.strptime(ligne_date, '%d/%m/%Y')
+                                        imb = Imb(refImb=row1['Dossier'], date_effective_de_raccordement=dates.date(), import_fk=i, pa_fk=pa)
+                                        imb.save()
+                                else:
+                                    pa = Pa.objects.get(refPa=row1['Id PA'])
+                                    if row1['Date effective raccordement'] == '' or not Imb.objects.filter(refImb=row1['Dossier']):
+                                        imb = Imb(refImb=row1['Dossier'], import_fk=i, pa_fk=pa)
+                                        imb.save()
+                                    else:
+                                        ligne_date = row1['Date effective raccordement']
+                                        dates = datetime.strptime(ligne_date, '%d/%m/%Y')
+                                        imb = Imb(refImb=row1['Dossier'], date_effective_de_raccordement=dates.date(), import_fk=i, pa_fk=pa)
+                                        imb.save()
+                            else:
+                                pmz = Pmz.objects.get(refPmz=row1['Id PM'])
+                                if row1['Id PA'] == '':
+                                    if row1['Date effective raccordement'] == '' or not Imb.objects.filter(refImb=row1['Dossier']):
+                                        imb = Imb(refImb=row1['Dossier'], import_fk=i)
+                                        imb.save()
+                                    else:
+                                        ligne_date = row1['Date effective raccordement']
+                                        dates = datetime.strptime(ligne_date, '%d/%m/%Y')
+                                        imb = Imb(refImb=row1['Dossier'], date_effective_de_raccordement=dates.date(), import_fk=i)
+                                        imb.save()
+                                elif not Pa.objects.filter(refPa=row1['Id PA']):
+                                    pa = Pa(refPa=row1['Id PA'], import_fk=i, pmz_fk=pmz)
+                                    pa.save()
+                                    # pa = Pa(refPa=row1['id PA'], import_fk=i, pmz_fk=pmz)
+                                    if row1['Date effective raccordement'] == '' or not Imb.objects.filter(refImb=row1['Dossier']):
+                                        imb = Imb(refImb=row1['Dossier'], import_fk=i, pa_fk=pa)
+                                        imb.save()
+                                    elif row1['Dossier'] != '':
+                                        ligne_date = row1['Date effective raccordement']
+                                        dates = datetime.strptime(ligne_date, '%d/%m/%Y')
+                                        imb = Imb(refImb=row1['Dossier'], date_effective_de_raccordement=dates.date(), import_fk=i, pa_fk=pa)
+                                        imb.save()
+                                else:
+                                    pa = Pa.objects.get(refPa=row1['Id PA'])
+                                    if row1['Date effective raccordement'] == '' or not Imb.objects.filter(refImb=row1['Dossier']):
+                                        imb = Imb(refImb=row1['Dossier'], import_fk=i, pa_fk=pa)
+                                        imb.save()
+                                    else:
+                                        ligne_date = row1['Date effective raccordement']
+                                        dates = datetime.strptime(ligne_date, '%d/%m/%Y')
+                                        imb = Imb(refImb=row1['Dossier'], date_effective_de_raccordement=dates.date(), import_fk=i, pa_fk=pa)
+                                        imb.save()
+
+
+
+
+
+# try:
+                            #      l = row1['id PM']
+                            #      pm = Pmz.objects.get(refPmz=l)
+                            #      print(pm)
+                            # except NameError:
+                            #      print("Pm n'existe pas")
+
 
             return HttpResponseRedirect(reverse('imports:index'))
     else:
