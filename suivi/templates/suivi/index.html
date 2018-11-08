@@ -1,14 +1,22 @@
 <!-- templates/suivi/index.html-->
 {% extends 'base.html' %}
 
-{% block title %}suivi{% endblock %}
+{% block title %}index{% endblock %}
 
 {% block content %}
-<center><h1>Suivi déploiement</h1></center>
-
-<form enctype="multipart/form-data" action="pa-autocomplete/" name="test" method="post">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input id="selectorPa" type="submit" value="Selectionner">
-</form>
+  <center>
+{% if user.is_authenticated %}
+  <br>
+{% else %}
+    <p>You are not logged in</p>
+    <a href="{% url 'login' %}">login</a>
+    {% endif %}
+  </center>
+{% if user.is_authenticated %}
+  <ul>
+    <li><a href="{% url 'suivi:suiviPm' %}">Suivi des PM</a></li>
+    <li><a href="{% url 'suivi:suiviPa' %}">Suivi des PA</a></li>
+    <li><a href="{% url 'suivi:suiviImb' %}">Suivi des IMB</a></li>
+  </ul>
+{% endif %}
 {% endblock %}

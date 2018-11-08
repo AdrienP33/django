@@ -1,0 +1,28 @@
+<!-- templates/imports/suiviImb.html-->
+{% extends 'base.html' %}
+
+{% block title %}suiviImb{% endblock %}
+
+{% block content %}
+<h1>Liste IMB</h1>
+<a href="{% url 'suivi:index' %}">Retour</a>
+<div class="component">
+	{% if imb_detail %}
+	<table>
+		<thead>
+		<tr>
+			<th>ID IMB</th>
+			<th>Date effective de raccordement</th>
+		</tr>
+		</thead>
+		<tbody>
+		{% for Imb in imb_detail %}
+		<tr><td class="user-name">{{ Imb.refImb }}</td><td class="user-email">{{ Imb.date_effective_de_raccordement }}</td>
+		{% endfor %}
+		</tbody>
+	</table>
+	{% else %}
+	<p>No imports are available.</p>
+	{% endif %}
+</div>
+{% endblock %}

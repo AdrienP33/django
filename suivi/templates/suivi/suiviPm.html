@@ -1,0 +1,29 @@
+<!-- templates/imports/detail.html-->
+{% extends 'base.html' %}
+
+{% block title %}suiviPm{% endblock %}
+
+{% block content %}
+<h1>Liste PM</h1>
+<a href="{% url 'suivi:index' %}">Retour</a>
+<div class="component">
+	{% if pm_detail %}
+	<table>
+		<thead>
+		<tr>
+			<th>ID PM</th>
+			<th>Nombre de Pa associés</th>
+			<th>Taux d'avancement</th>
+		</tr>
+		</thead>
+		<tbody>
+		{% for Pmz in pm_detail %}
+		<tr><td class="user-name">{{ Pmz.refPmz }}</td><td class="user-email"></td><td class="user-phone"></td></tr>
+		{% endfor %}
+		</tbody>
+	</table>
+	{% else %}
+	<p>No imports are available.</p>
+	{% endif %}
+</div>
+{% endblock %}

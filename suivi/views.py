@@ -2,9 +2,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views import generic
 from django.views.generic import TemplateView
-from dal import autocomplete
 
-from imports.models import ImportOptimum, Import, Pa
+from imports.models import ImportOptimum, Import, Pa, Pmz, Imb
 
 
 class IndexView(LoginRequiredMixin, TemplateView):
@@ -13,22 +12,34 @@ class IndexView(LoginRequiredMixin, TemplateView):
     template_name = 'suivi/index.html'
 
 
-class PaAutocomplete(LoginRequiredMixin, autocomplete.Select2QuerySetView, generic.FormView):
+class PmView(LoginRequiredMixin, generic.ListView):
+    login_url = '/login'
+    redirect_field_name = 'redirect_to'
+    model = Pmz
+    template_name = 'suivi/suiviPm.html'
+    context_object_name = 'pm_detail'
+
+    def get_queryset(self):
+        return Pmz.objects.all()
+
+
+class PaView(LoginRequiredMixin, generic.ListView):
     login_url = '/login'
     redirect_field_name = 'redirect_to'
     model = Pa
-    template_name = 'suivi/suivi.html'
-    form_class = Pa
-    success_url = 'success.html'
+    template_name = 'suivi/suiviPa.html'
+    context_object_name = 'pa_detail'
 
     def get_queryset(self):
-        # Don't forget to filter out results depending on the visitor !
-        if not self.request.user.is_authenticated():
-            return Pa.objects.none()
+        return Pa.objects.all()
 
-        qs = Pa.objects.all()
 
-        if self.q:
-            qs = qs.filter(name__istartswith=self.q)
+class ImbView(LoginRequiredMixin, generic.ListView):
+    login_url = '/login'
+    redirect_field_name = 'redirect_to'
+    model = Imb
+    template_name = 'suivi/suiviImb.html'
+    context_object_name = 'imb_detail'
 
-        return qs
+    def get_queryset(self):
+        return Imb.objects.all()

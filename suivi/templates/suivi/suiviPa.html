@@ -1,0 +1,29 @@
+<!-- templates/imports/suiviPa.html-->
+{% extends 'base.html' %}
+
+{% block title %}suiviPa{% endblock %}
+
+{% block content %}
+<h1>Liste PA</h1>
+<a href="{% url 'suivi:index' %}">Retour</a>
+<div class="component">
+	{% if pa_detail %}
+	<table>
+		<thead>
+		<tr>
+			<th>ID PA</th>
+			<th>Nombre d'IMB associés</th>
+			<th>Taux d'avancement</th>
+		</tr>
+		</thead>
+		<tbody>
+		{% for Pa in pa_detail %}
+		<tr><td class="user-name">{{ Pa.refPa }}</td><td class="user-email"></td><td class="user-phone"></td></tr>
+		{% endfor %}
+		</tbody>
+	</table>
+	{% else %}
+	<p>No imports are available.</p>
+	{% endif %}
+</div>
+{% endblock %}
