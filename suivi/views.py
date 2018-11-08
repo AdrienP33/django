@@ -18,9 +18,7 @@ class PmView(LoginRequiredMixin, generic.ListView):
     model = Pmz
     template_name = 'suivi/suiviPm.html'
     context_object_name = 'pm_detail'
-
-    def get_queryset(self):
-        return Pmz.objects.all()
+    queryset = Pmz.objects.all()
 
 
 class PaView(LoginRequiredMixin, generic.ListView):
@@ -29,9 +27,7 @@ class PaView(LoginRequiredMixin, generic.ListView):
     model = Pa
     template_name = 'suivi/suiviPa.html'
     context_object_name = 'pa_detail'
-
-    def get_queryset(self):
-        return Pa.objects.all()
+    queryset = Pa.objects.all()
 
 
 class ImbView(LoginRequiredMixin, generic.ListView):
@@ -40,6 +36,4 @@ class ImbView(LoginRequiredMixin, generic.ListView):
     model = Imb
     template_name = 'suivi/suiviImb.html'
     context_object_name = 'imb_detail'
-
-    def get_queryset(self):
-        return Imb.objects.all()
+    queryset = Imb.objects.all()
